@@ -8,15 +8,14 @@ using SalesTrack.data; // Adjust according to your actual namespace
 public class SalesDataService : ISalesDataService
 {
     private readonly HttpClient _httpClient;
-    private string storeUrl = "master-minded";
-    private string accessToken = "ff3e81b6eb93be3a049ad7548759cd6f";
+    
     public SalesDataService(HttpClient httpClient)
     {
         _httpClient = httpClient;
         
     }
         
-    public async Task<List<SalesData>> FetchSalesData()
+    public async Task<List<SalesData>> FetchSalesData(string storeUrl, string accessToken)
     {
         var requestUrl = $"{storeUrl}/admin/api/2023-01/orders.json"; // Adjust the endpoint as necessary
         //var requestUrl = "https://your-store-name.myshopify.com/admin/api/2023-01/orders.json";

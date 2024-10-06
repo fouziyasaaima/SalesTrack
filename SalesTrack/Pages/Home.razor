@@ -19,7 +19,7 @@
         {
             // Replace with your actual access token
             // Retrieve the Shopify URL from Excel
-            /*var storeUrl = await JSRuntime.InvokeAsync<string>("getShopifyUrl");
+            var storeUrl = await JSRuntime.InvokeAsync<string>("getShopifyUrl");
 
             // Check if the URL is retrieved
             if (string.IsNullOrEmpty(storeUrl))
@@ -38,9 +38,8 @@
             }
 
             // Call the FetchSalesData method with the retrieved URL
-            salesData = await SalesDataService.FetchSalesData(storeUrl, accessToken);
-            */
-            salesData = await SalesDataService.FetchSalesData();
+            salesData = await SalesDataService.FetchSalesData(storeUrl, accessToken);            
+            
             //CreateDashboard(salesData);
         }
 
