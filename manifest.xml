@@ -1,0 +1,94 @@
+﻿<OfficeApp
+    xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+    xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
+    xsi:type="TaskPaneApp">
+
+  <Id>4aeb7f5e-a283-4a08-83f7-5e7271e4fa2a</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>Saft Data Solutions</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="Blazor Excel Add-in" />
+  <Description DefaultValue="Office Add-in using Blazor" />
+  <IconUrl DefaultValue="https://your-blazor-app.com/Images/Button32x32.png" />
+  <SupportUrl DefaultValue="https://saftdatasolutions.com/support" />
+  <AppDomains>
+    <AppDomain>https://your-blazor-app.com</AppDomain>
+  </AppDomains>
+
+  <Hosts>
+    <Host Name="Workbook" />
+  </Hosts>
+
+  <DefaultSettings>
+    <SourceLocation DefaultValue="https://your-blazor-app.com/" />
+  </DefaultSettings>
+
+  <Permissions>ReadWriteDocument</Permissions>
+
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <Hosts>
+      <Host xsi:type="Workbook">
+        <DesktopFormFactor>
+          <GetStarted>
+            <Title resid="BlazorExcelAddin.GetStarted.Title"/>
+            <Description resid="BlazorExcelAddin.GetStarted.Description"/>
+            <LearnMoreUrl resid="BlazorExcelAddin.GetStarted.LearnMoreUrl"/>
+          </GetStarted>
+          <FunctionFile resid="BlazorExcelAddin.FunctionFile.Url" />
+          <ExtensionPoint xsi:type="PrimaryCommandSurface">
+            <OfficeTab id="TabHome">
+              <Group id="BlazorExcelAddin.Group1">
+                <Label resid="BlazorExcelAddin.Group1Label" />
+                <Icon>
+                  <bt:Image size="16" resid="BlazorExcelAddin.tpicon_16x16" />
+                  <bt:Image size="32" resid="BlazorExcelAddin.tpicon_32x32" />
+                  <bt:Image size="80" resid="BlazorExcelAddin.tpicon_80x80" />
+                </Icon>
+                <Control xsi:type="Button" id="BlazorExcelAddin.TaskpaneButton">
+                  <Label resid="BlazorExcelAddin.TaskpaneButton.Label" />
+                  <Supertip>
+                    <Title resid="BlazorExcelAddin.TaskpaneButton.Label" />
+                    <Description resid="BlazorExcelAddin.TaskpaneButton.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="BlazorExcelAddin.tpicon_16x16" />
+                    <bt:Image size="32" resid="BlazorExcelAddin.tpicon_32x32" />
+                    <bt:Image size="80" resid="BlazorExcelAddin.tpicon_80x80" />
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>ButtonId1</TaskpaneId>
+                    <SourceLocation resid="BlazorExcelAddin.Taskpane.Url" />
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+
+    <Resources>
+      <bt:Images>
+        <bt:Image id="BlazorExcelAddin.tpicon_16x16" DefaultValue="https://your-blazor-app.com/Images/Button16x16.png" />
+        <bt:Image id="BlazorExcelAddin.tpicon_32x32" DefaultValue="https://your-blazor-app.com/Images/Button32x32.png" />
+        <bt:Image id="BlazorExcelAddin.tpicon_80x80" DefaultValue="https://your-blazor-app.com/Images/Button80x80.png" />
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="BlazorExcelAddin.FunctionFile.Url" DefaultValue="https://your-blazor-app.com/Functions/FunctionFile.html" />
+        <bt:Url id="BlazorExcelAddin.Taskpane.Url" DefaultValue="https://your-blazor-app.com/" />
+        <bt:Url id="BlazorExcelAddin.GetStarted.LearnMoreUrl" DefaultValue="https://your-blazor-app.com/getstarted" />
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="BlazorExcelAddin.TaskpaneButton.Label" DefaultValue="Show Taskpane" />
+        <bt:String id="BlazorExcelAddin.Group1Label" DefaultValue="Commands Group" />
+        <bt:String id="BlazorExcelAddin.GetStarted.Title" DefaultValue="Get started with your Blazor Excel Add-in!" />
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="BlazorExcelAddin.TaskpaneButton.Tooltip" DefaultValue="Click to Show a Taskpane" />
+        <bt:String id="BlazorExcelAddin.GetStarted.Description" DefaultValue="Your Blazor add-in loaded successfully. Click 'Show Taskpane' to begin." />
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
+</OfficeApp>

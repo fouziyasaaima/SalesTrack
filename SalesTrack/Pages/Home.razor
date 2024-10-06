@@ -1,0 +1,66 @@
+﻿@page "/"
+@using System.Net.Http.Json
+@inject HttpClient Http
+@inject IJSRuntime JSRuntime
+@using SalesTrack.data
+@inject ISalesDataService SalesDataService
+
+<h3>Shopify Sales Dashboard</h3>
+
+<button @onclick="InsertSalesData">Insert Today's Sales Data into Excel</button>
+<button @onclick="CreateDashboard">Embed Dashboard into Excel</button>
+
+@code 
+{
+    
+        private List<SalesData> salesData;
+
+        protected override async Task OnInitializedAsync()
+        {
+            // Replace with your actual access token
+            // Retrieve the Shopify URL from Excel
+            /*var storeUrl = await JSRuntime.InvokeAsync<string>("getShopifyUrl");
+
+            // Check if the URL is retrieved
+            if (string.IsNullOrEmpty(storeUrl))
+            {
+                // Handle the error (e.g., show a message to the user)
+                ;
+            }
+
+            var accessToken = await JSRuntime.InvokeAsync<string>("getShopifyToken");
+            
+            // Check if the URL is retrieved
+            if (string.IsNullOrEmpty(accessToken))
+            {
+                // Handle the error (e.g., show a message to the user)
+                return;
+            }
+
+            // Call the FetchSalesData method with the retrieved URL
+            salesData = await SalesDataService.FetchSalesData(storeUrl, accessToken);
+            */
+            salesData = await SalesDataService.FetchSalesData();
+            //CreateDashboard(salesData);
+        }
+
+        private async Task InsertSalesData()
+        {
+            await JSRuntime.InvokeVoidAsync("insertSalesData", salesData);
+        }
+
+        private async Task CreateDashboard()
+        {
+            var (todaySales, last7DaysSales, last30DaysSales) = PrepareChartData(salesData);
+            await JSRuntime.InvokeVoidAsync("createDashboard", todaySales, last7DaysSales, last30DaysSales, salesData);
+        }
+
+        private (List<SalesData>, List<SalesData>, List<SalesData>) PrepareChartData(List<SalesData> salesData)
+        {
+            var todaySales = salesData.Where(s => s.CreatedAt.Date == DateTime.Today).ToList();
+            var last7DaysSales = salesData.Where(s => s.CreatedAt >= DateTime.Today.AddDays(-7)).ToList();
+            var last30DaysSales = salesData.Where(s => s.CreatedAt >= DateTime.Today.AddDays(-30)).ToList();
+
+            return (todaySales, last7DaysSales, last30DaysSales);
+        }
+}
